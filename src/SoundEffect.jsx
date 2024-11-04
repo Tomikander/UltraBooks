@@ -28,9 +28,9 @@ const SoundEffect = () => {
       </audio>
       <div className='styleButton'>
         {isPlaying ? ( 
-          <button onClick={handleStop}>O</button>
+          <button onClick={handleStop}>M</button>
         ) : (
-          <button onClick={handlePlay}>I</button>  
+          <button onClick={handlePlay}>M</button>  
         )}
       </div>
     </div>
