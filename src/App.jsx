@@ -4,8 +4,9 @@ import './App.css';
 import words from './words';
 import images from './images';
 import SoundEffect from './SoundEffect';
-import zvuk1 from './zvuk1.mp3';
-import zvuk2 from './zvuk2.mp3';
+import AnswerComponent from './components/AnswerComponent';  // Importing a new component
+import { getRandomWords } from './components/utilita';
+import { CORRECT_FEEDBACK, INCORRECT_FEEDBACK, BUTTON_TEXT, RESET_BUTTON_TEXT, NOW_GAME } from './components/twoWords.js';
 
 const App = () => {
     const [mainWord, setMainWord] = useState(null);
@@ -15,10 +16,9 @@ const App = () => {
     const [userAnswer, setUserAnswer] = useState('');
     const [feedback, setFeedback] = useState('');
     const [mainImage, setMainImage] = useState(null);
-    const winnerSound = new Audio(zvuk1);
-    const lostSound = new Audio(zvuk2)
 
-    const newChangeWord = () => {
+    // Function for changing words
+    const showNewQuestionWord = () => {
         const index = Math.floor(Math.random() * words.length);
         setMainWord(words[index]);
         setMainImage(images[words[index]]);
@@ -27,7 +27,8 @@ const App = () => {
         setFeedback('');
     };
 
-    const fourWords = () => {
+    // Function to generate additional words
+    const showFourWords = () => {
         if (mainWord) {
             const filteredWords = words.filter(word => word !== mainWord);
             const additionalWords = getRandomWords(filteredWords, 3); 
@@ -37,23 +38,8 @@ const App = () => {
             setShowAdditionalWords(true);
         }
     };
-
-    const getRandomWords = (wordsArray, count = 4) => {
-        const shuffled = [...wordsArray].sort(() => 0.5 - Math.random());
-        return shuffled.slice(0, count);
-    };
- 
-   const handleAnswer = (word) => {
-        setUserAnswer(word);
-        if (word === mainWord) {
-            setFeedback('Правильно!');
-            winnerSound.play();
-        } else {
-           setFeedback('Неправильно, попробуйте ще раз.');
-           lostSound.play();
-        }
-    };
-
+    
+     // Game reset function
     const resetGame = () => {
         setMainWord(null);
         setRandomWords([]);
@@ -67,34 +53,38 @@ const App = () => {
     return (
         <>
             <SoundEffect />
-            <h1>Зіграймо!</h1>
+            <h1>{ NOW_GAME }</h1>
             <div className="container">
-                <button onClick={newChangeWord}>тисни сюди!</button>
+                <button onClick={showNewQuestionWord}>{BUTTON_TEXT}</button>
                 {showMainWord && (
-                    <div className='picture'>
+                    <div className="picture">
                         <img src={mainImage} alt={mainWord} style={{ width: '118px', height: '118px' }} />
                         <h2>{mainWord}</h2>
                     </div>
                 )}
-                <div className='answer'>
-                    <button onClick={fourWords} disabled={!showMainWord}>Це хто?</button>
+                <div className="answer">
+                    <button onClick={showFourWords} disabled={!showMainWord}>{BUTTON_TEXT}</button>
                 </div>
+
+                {/* Let's integrate AnswerComponent */}
                 {showAdditionalWords && (
-                    <div>
-                        {randomWords.map((word, index) => (
-                            <button key={index} onClick={() => handleAnswer(word)} style={{ margin: '5px' }}>
-                                {word}
-                            </button>
-                        ))}
-                    </div>
+                    <AnswerComponent 
+                        mainWord={mainWord} 
+                        randomWords={randomWords} 
+                        setFeedback={setFeedback} 
+                        feedback={feedback}
+                        correctFeedback={CORRECT_FEEDBACK} 
+                        incorrectFeedback={INCORRECT_FEEDBACK}
+                    />
                 )}
                 {feedback && <h1>{feedback}</h1>}
-                <div className='Resetbloc'>
-                  <button onClick={resetGame}>П</button>
+                <div className="Resetbloc">
+                    <button onClick={resetGame}>{RESET_BUTTON_TEXT}</button>
                 </div>
             </div>
         </>
     );
-}
+};
+
 
 export default App;
