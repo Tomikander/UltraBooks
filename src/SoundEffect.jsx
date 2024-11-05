@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
-import soundFile from './sound.mp3'; // Убедитесь, что путь правильный
+import soundFile from './sound.mp3'; // Make sure the path is correct
 
 const SoundEffect = () => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlay = () => {
-    audioRef.current.volume = 0.3; // Установите громкость (0.0 до 1.0)
-    audioRef.current.loop = true; // Включите зацикливание
+    audioRef.current.volume = 0.3; // Set volume (0.0 to 1.0)
+    audioRef.current.loop = true; // Turn on looping
     audioRef.current.play().catch((error) => {
       console.error("Ошибка воспроизведения:", error);
     });
@@ -15,8 +15,8 @@ const SoundEffect = () => {
   };
 
   const handleStop = () => {
-    audioRef.current.pause(); // Остановите воспроизведение
-    audioRef.current.currentTime = 0; // Верните к началу
+    audioRef.current.pause(); // Stop playback
+    audioRef.current.currentTime = 0; // Return to the beginning
     setIsPlaying(false);
   };
 
