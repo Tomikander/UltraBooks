@@ -6,7 +6,7 @@ import images from './images';
 import SoundEffect from './SoundEffect';
 import AnswerComponent from './components/AnswerComponent';  // Importing a new component
 import { getRandomWords } from './components/utilita';
-import { CORRECT_FEEDBACK, INCORRECT_FEEDBACK, BUTTON_TEXT, RESET_BUTTON_TEXT, NOW_GAME } from './components/twoWords.js';
+import { CORRECT_FEEDBACK, INCORRECT_FEEDBACK, BUTTON_TEXT, RESET_BUTTON_TEXT, NOW_GAME, BUTTON_START } from './components/twoWords.js';
 
 const App = () => {
     const [mainWord, setMainWord] = useState(null);
@@ -55,7 +55,7 @@ const App = () => {
             <SoundEffect />
             <h1>{ NOW_GAME }</h1>
             <div className="container">
-                <button onClick={showNewQuestionWord}>{BUTTON_TEXT}</button>
+                <button onClick={showNewQuestionWord}>{BUTTON_START}</button>
                 {showMainWord && (
                     <div className="picture">
                         <img src={mainImage} alt={mainWord} style={{ width: '118px', height: '118px' }} />

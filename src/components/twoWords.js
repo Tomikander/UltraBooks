@@ -3,3 +3,4 @@ export const INCORRECT_FEEDBACK = 'Неправильно, попробуйте 
 export const BUTTON_TEXT = 'Це хто?';
 export const RESET_BUTTON_TEXT = 'П';
 export const NOW_GAME = 'Зіграймо';
+export const BUTTON_START = 'Натисни тут!';
