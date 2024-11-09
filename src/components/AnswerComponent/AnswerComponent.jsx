@@ -1,13 +1,12 @@
-const answerComponent = ({
+export const AnswerComponent = ({
   mainWord,
   randomWords,
 	setFeedback,
-	feedback,
 	correctFeedback,
 	incorrectFeedback
 })	=> {
-	const handleAnswer = (word) =>{
-		if(word === mainWord)	{
+	const handleAnswer = (wordObject) =>{
+		if(wordObject.value === mainWord)	{
 			setFeedback(correctFeedback);
 		}	else {
 			setFeedback(incorrectFeedback);
@@ -16,13 +15,11 @@ const answerComponent = ({
 
 	return (
 		<div>
-			{randomWords.map((word, index)	=>	(
-				<button key={index} onClick={() => handleAnswer(word)}>
-					{word}
+			{randomWords.map((wordObject, index)	=>	(
+				<button key={index} onClick={() => handleAnswer(wordObject)}>
+					{wordObject.value}
 				</button>
 			))}
 		</div>
 	);
 };
-
-export default answerComponent

@@ -13,16 +13,17 @@ const WordSelectorWithFourWords = ({
     if (mainWord) {
       // Фильтруем слова, исключая основное слово
       const filteredWords = wordObjects.filter(wordObject => wordObject.value !== mainWord);
-      
+      const mainWordObject = wordObjects.find(wordObject => wordObject.value === mainWord);
+
       // Выбираем случайные дополнительные слова
-      const additionalWords = getRandomWords(filteredWords, 3); 
-      
+      const additionalWords = getRandomWords(filteredWords, 3);
+
       // Собираем все слова в одном массиве (основное + дополнительные)
-      const allWords = [mainWord, ...additionalWords];
-      
+      const allWords = [mainWordObject, ...additionalWords];
+
       // Перемешиваем слова случайным образом
       const shuffledWords = allWords.sort(() => 0.5 - Math.random());
-      
+
       // Обновляем состояния с новыми случайными словами
       setRandomWords(shuffledWords);
       setShowAdditionalWords(true);  // Показываем дополнительные слова

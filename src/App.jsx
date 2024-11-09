@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import WordSelector from './components/WordSelector/WordSelector';  // Компонент для выбора основного слова
 import WordSelectorWithFourWords from './components/WordSelectorWithFourWords/WordSelectorWithFourWords';  // Наш новый компонент
-import AnswerComponent from './components/AnswerComponent/answerComponent';
+import { AnswerComponent } from './components/AnswerComponent/AnswerComponent';
 import SoundEffect from './components/SoundEffect/SoundEffect';
 import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher';
-
 
 const App = () => {
   const { t, i18n } = useTranslation();
@@ -33,8 +32,8 @@ const App = () => {
       <h1>{t('NOW_GAME')}</h1>
 
       {/* Используем компонент WordSelector */}
-      <WordSelector 
-        setMainWord={setMainWord} 
+      <WordSelector
+        setMainWord={setMainWord}
         setMainImage={setMainImage}
         setShowMainWord={setShowMainWord}
         setShowAdditionalWords={setShowAdditionalWords}
@@ -50,7 +49,7 @@ const App = () => {
       )}
 
       {/* Используем компонент WordSelectorWithFourWords */}
-      <WordSelectorWithFourWords 
+      <WordSelectorWithFourWords
         mainWord={mainWord}
         setRandomWords={setRandomWords}
         setShowAdditionalWords={setShowAdditionalWords}
@@ -58,12 +57,12 @@ const App = () => {
 
       {/* Компонент для отображения ответов */}
       {showAdditionalWords && (
-        <AnswerComponent 
-          mainWord={mainWord} 
-          randomWords={randomWords} 
-          setFeedback={setFeedback} 
+        <AnswerComponent
+          mainWord={mainWord}
+          randomWords={randomWords}
+          setFeedback={setFeedback}
           feedback={feedback}
-          correctFeedback={t('CORRECT_FEEDBACK')} 
+          correctFeedback={t('CORRECT_FEEDBACK')}
           incorrectFeedback={t('INCORRECT_FEEDBACK')}
         />
       )}
