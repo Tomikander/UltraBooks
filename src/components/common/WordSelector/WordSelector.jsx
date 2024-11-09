@@ -1,6 +1,4 @@
-// src/components/WordSelector/WordSelector.js
-import React from 'react';
-import wordObjects from '../../data/wordObjects';  // Путь к вашему массиву с данными
+import wordObjects from '../../../data/wordObjects';  // Путь к вашему массиву с данными
 
 const WordSelector = ({ setMainWord, setMainImage, setShowMainWord, setShowAdditionalWords, setFeedback }) => {
 

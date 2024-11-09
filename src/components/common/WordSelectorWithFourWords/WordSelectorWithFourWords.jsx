@@ -1,6 +1,5 @@
-import React from 'react';
-import wordObjects from '../../data/wordObjects';  // Импортируем массив с данными
-import { getRandomWords } from '../../utils/getRandomWords';  // Утилита для получения случайных слов
+import wordObjects from '../../../data/wordObjects';  // Импортируем массив с данными
+import { getRandomWords } from '../../../utils/getRandomWords';  // Утилита для получения случайных слов
 
 const WordSelectorWithFourWords = ({
   mainWord,
