@@ -1,4 +1,4 @@
-import WordsPage from './components/pages/WordsPage/WordsPage';
+import { WordsPage } from './components/pages';
 
 const App = () => (
   <WordsPage />
