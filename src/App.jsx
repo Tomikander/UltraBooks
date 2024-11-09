@@ -1,98 +1,82 @@
 import React, { useState } from 'react';
-import './index.css';
-import './App.css';
-import words from './words';
-import images from './images';
-import SoundEffect from './SoundEffect';
-import AnswerComponent from './components/AnswerComponent';  // Importing a new component
-import { getRandomWords } from './components/utilita';
-import { useTranslation } from 'react-i18next';  // Imported hook for working with translations
-import './i18n'; // Importing i18n settings
+import { useTranslation } from 'react-i18next';
+import WordSelector from './components/WordSelector/WordSelector';  // Компонент для выбора основного слова
+import WordSelectorWithFourWords from './components/WordSelectorWithFourWords/WordSelectorWithFourWords';  // Наш новый компонент
+import AnswerComponent from './components/AnswerComponent/answerComponent';
+import SoundEffect from './components/SoundEffect/SoundEffect';
+import LanguageSwitcher from './components/LanguageSwitcher/LanguageSwitcher';
+
 
 const App = () => {
-  const { t, i18n } = useTranslation(); // We get the t() function for translation and the i18n object
+  const { t, i18n } = useTranslation();
 
   const [mainWord, setMainWord] = useState(null);
-  const [randomWords, setRandomWords] = useState([]);
+  const [mainImage, setMainImage] = useState(null);
   const [showMainWord, setShowMainWord] = useState(false);
   const [showAdditionalWords, setShowAdditionalWords] = useState(false);
-  const [userAnswer, setUserAnswer] = useState('');
+  const [randomWords, setRandomWords] = useState([]);
   const [feedback, setFeedback] = useState('');
-  const [mainImage, setMainImage] = useState(null);
 
-  // Function for changing words
-  const showNewQuestionWord = () => {
-      const index = Math.floor(Math.random() * words.length);
-      setMainWord(words[index]);
-      setMainImage(images[words[index]]);
-      setShowMainWord(true);
-      setShowAdditionalWords(false); 
-      setFeedback('');
-  };
-
-  // Function to generate additional words
-  const showFourWords = () => {
-      if (mainWord) {
-          const filteredWords = words.filter(word => word !== mainWord);
-          const additionalWords = getRandomWords(filteredWords, 3); 
-          const allWords = [mainWord, ...additionalWords];
-          const shuffledWords = allWords.sort(() => 0.5 - Math.random());
-          setRandomWords(shuffledWords);
-          setShowAdditionalWords(true);
-      }
-  };
-  
-  // Game reset function
+  // Функция для сброса игры
   const resetGame = () => {
-      setMainWord(null);
-      setRandomWords([]);
-      setShowMainWord(false);
-      setShowAdditionalWords(false);
-      setUserAnswer('');
-      setFeedback('');
-      setMainImage(null);
+    setMainWord(null);
+    setMainImage(null);
+    setShowMainWord(false);
+    setShowAdditionalWords(false);
+    setRandomWords([]);
+    setFeedback('');
   };
 
   return (
-      <>
-          <SoundEffect />
-          <h1>{t('NOW_GAME')}</h1>
-          <div className="container">
-              <button onClick={showNewQuestionWord}>{t('BUTTON_START')}</button>
-              {showMainWord && (
-                  <div className="picture">
-                      <img src={mainImage} alt={mainWord} style={{ width: '118px', height: '118px' }} />
-                      <h2>{mainWord}</h2>
-                  </div>
-              )}
-              <div className="answer">
-                  <button onClick={showFourWords} disabled={!showMainWord}>{t('BUTTON_TEXT')}</button>
-              </div>
+    <>
+      <SoundEffect />
+      <h1>{t('NOW_GAME')}</h1>
 
-              {/* Let's integrate AnswerComponent */}
-              {showAdditionalWords && (
-                  <AnswerComponent 
-                      mainWord={mainWord} 
-                      randomWords={randomWords} 
-                      setFeedback={setFeedback} 
-                      feedback={feedback}
-                      correctFeedback={t('CORRECT_FEEDBACK')} 
-                      incorrectFeedback={t('INCORRECT_FEEDBACK')}
-                  />
-              )}
-              {feedback && <h1>{feedback}</h1>}
-              <div className="Resetbloc">
-                  <button onClick={resetGame}>{t('RESET_BUTTON_TEXT')}</button>
-              </div>
-          </div>
+      {/* Используем компонент WordSelector */}
+      <WordSelector 
+        setMainWord={setMainWord} 
+        setMainImage={setMainImage}
+        setShowMainWord={setShowMainWord}
+        setShowAdditionalWords={setShowAdditionalWords}
+        setFeedback={setFeedback}
+      />
 
-          {/* Buttons to change language */}
-          <div>
-              <button onClick={() => i18n.changeLanguage('en')}>English</button>
-              <button onClick={() => i18n.changeLanguage('ru')}>Русский</button>
-              <button onClick={() => i18n.changeLanguage('uk')}>Українська</button>
-          </div>
-      </>
+      {/* Основное слово */}
+      {showMainWord && (
+        <div className="picture">
+          <img src={mainImage} alt={mainWord} style={{ width: '118px', height: '118px' }} />
+          <h2>{mainWord}</h2>
+        </div>
+      )}
+
+      {/* Используем компонент WordSelectorWithFourWords */}
+      <WordSelectorWithFourWords 
+        mainWord={mainWord}
+        setRandomWords={setRandomWords}
+        setShowAdditionalWords={setShowAdditionalWords}
+      />
+
+      {/* Компонент для отображения ответов */}
+      {showAdditionalWords && (
+        <AnswerComponent 
+          mainWord={mainWord} 
+          randomWords={randomWords} 
+          setFeedback={setFeedback} 
+          feedback={feedback}
+          correctFeedback={t('CORRECT_FEEDBACK')} 
+          incorrectFeedback={t('INCORRECT_FEEDBACK')}
+        />
+      )}
+
+      {feedback && <h1>{feedback}</h1>}
+
+      <div className="Resetbloc">
+        <button onClick={resetGame}>{t('RESET_BUTTON_TEXT')}</button>
+      </div>
+
+      {/* Переключение языков */}
+      <LanguageSwitcher changeLanguage={i18n.changeLanguage} />
+    </>
   );
 };
 
