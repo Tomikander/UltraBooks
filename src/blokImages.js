@@ -1,10 +1,10 @@
-import words from './words';
-import images from './images';
+import wordObjects from './wordObjects';
+import images from '/images';
 
-const blokImages = words.map(word => ({
-  word,
-  imageUrl: images[word],
+const blokImages = wordObjects.map(word => ({
+  wordObjects,
+  images: images[word],
 }));
 
 export default blokImages; 
-export { words }; 
+export { wordObjects }; 
