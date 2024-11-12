@@ -1,5 +1,5 @@
-import wordObjects from '../../../data/wordObjects';  // Импортируем массив с данными
-import { getRandomWords } from '../../../utils/getRandomWords';  // Утилита для получения случайных слов
+import wordObjects from '../../../data/wordObjects';  // Importing an array with data
+import { getRandomWords } from '../../../utils/getRandomWords';  // Utility for getting random words
 
 const WordSelectorWithFourWords = ({
   mainWord,
@@ -7,25 +7,25 @@ const WordSelectorWithFourWords = ({
   setShowAdditionalWords,
 }) => {
 
-  // Функция для показа дополнительных слов
+  // Function for displaying additional words
   const showFourWords = () => {
     if (mainWord) {
-      // Фильтруем слова, исключая основное слово
+      // Filter words excluding the main word
       const filteredWords = wordObjects.filter(wordObject => wordObject.value !== mainWord);
       const mainWordObject = wordObjects.find(wordObject => wordObject.value === mainWord);
 
-      // Выбираем случайные дополнительные слова
+      // Selecting random additional words
       const additionalWords = getRandomWords(filteredWords, 3);
 
-      // Собираем все слова в одном массиве (основное + дополнительные)
+      // We collect all the words in one array (main + additional)
       const allWords = [mainWordObject, ...additionalWords];
 
-      // Перемешиваем слова случайным образом
+      // Shuffle the words randomly
       const shuffledWords = allWords.sort(() => 0.5 - Math.random());
 
-      // Обновляем состояния с новыми случайными словами
+      // Update states with new random words
       setRandomWords(shuffledWords);
-      setShowAdditionalWords(true);  // Показываем дополнительные слова
+      setShowAdditionalWords(true);  // Showing additional words
     }
   };
 

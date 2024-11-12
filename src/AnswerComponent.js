@@ -30,15 +30,15 @@ const AnswerComponent = ({ mainWord, randomWords, setFeedback }) => {
           {randomWords.map((wordObj) => {
             if (typeof wordObj.value !== 'string') {
               console.warn(`Ожидалась строка, но получен объект:`, wordObj);
-              return null;  // Игнорируем, если это не строка
+              return null;  // Ignore if it's not a string
             }
             return (
               <button
-                key={wordObj.id}  // Используем id для ключа
-                onClick={() => handleAnswer(wordObj.value)}  // Передаем value для проверки
+                key={wordObj.id}  // Use id for the key
+                onClick={() => handleAnswer(wordObj.value)}  // Passing value for verification
                 style={{ margin: '5px' }}
               >
-                {wordObj.value} {/* Отображаем значение "value" (название животного) */}
+                {wordObj.value} {/*Display the value "value" (name of the animal) */}
               </button>
             );
           })}

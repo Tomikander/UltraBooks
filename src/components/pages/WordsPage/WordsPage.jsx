@@ -16,7 +16,7 @@ export const WordsPage = () => {
     const [randomWords, setRandomWords] = useState([]);
     const [feedback, setFeedback] = useState('');
 
-    // Функция для сброса игры
+    // Function to reset the game
     const resetGame = () => {
       setMainWord(null);
       setMainImage(null);
@@ -31,7 +31,7 @@ export const WordsPage = () => {
         <SoundEffect />
         <h1>{t('NOW_GAME')}</h1>
 
-        {/* Используем компонент WordSelector */}
+        {/* Using the WordSelector component */}
         <WordSelector
           setMainWord={setMainWord}
           setMainImage={setMainImage}
@@ -40,7 +40,7 @@ export const WordsPage = () => {
           setFeedback={setFeedback}
         />
 
-        {/* Основное слово */}
+        {/* Basic word */}
         {showMainWord && (
           <div className="picture">
             <img src={mainImage} alt={mainWord} style={{ width: '118px', height: '118px' }} />
@@ -48,14 +48,14 @@ export const WordsPage = () => {
           </div>
         )}
 
-        {/* Используем компонент WordSelectorWithFourWords */}
+        {/* Using the WordSelectorWithFourWords component */}
         <WordSelectorWithFourWords
           mainWord={mainWord}
           setRandomWords={setRandomWords}
           setShowAdditionalWords={setShowAdditionalWords}
         />
 
-        {/* Компонент для отображения ответов */}
+        {/* Component for displaying responses */}
         {showAdditionalWords && (
           <AnswerComponent
             mainWord={mainWord}
@@ -73,7 +73,7 @@ export const WordsPage = () => {
           <button onClick={resetGame}>{t('RESET_BUTTON_TEXT')}</button>
         </div>
 
-        {/* Переключение языков */}
+        {/* Switch languages */}
         <LanguageSwitcher changeLanguage={i18n.changeLanguage} />
       </>
     );

@@ -1,19 +1,19 @@
-import wordObjects from '../../../data/wordObjects';  // Путь к вашему массиву с данными
+import wordObjects from '../../../data/wordObjects';  // Path to your data array
 
 const WordSelector = ({ setMainWord, setMainImage, setShowMainWord, setShowAdditionalWords, setFeedback }) => {
 
-  // Функция для выбора нового слова
+  // Function for selecting a new word
   const showNewQuestionWord = () => {
-    // Случайным образом выбираем слово из массива
+    // Randomly select a word from the array
     const randomIndex = Math.floor(Math.random() * wordObjects.length);
     const selectedWord = wordObjects[randomIndex];
 
-    // Обновляем состояние в родительском компоненте
+    // Update the state in the parent component
     setMainWord(selectedWord.value);
     setMainImage(selectedWord.src);
-    setShowMainWord(true);  // Показываем основное слово
-    setShowAdditionalWords(false);  // Скрываем дополнительные слова
-    setFeedback('');  // Очищаем обратную связь
+    setShowMainWord(true);  // Showing the main word
+    setShowAdditionalWords(false);  // Showing the main word
+    setFeedback('');  // Clearing feedback
   };
 
   return (
