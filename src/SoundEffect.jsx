@@ -24,7 +24,6 @@ const SoundEffect = () => {
     <div>
       <audio ref={audioRef}>
         <source src={soundFile} type="audio/mpeg" />
-        <p>Your browser does not support the audio element.</p>
       </audio>
       <div className='styleButton'>
         {isPlaying ? ( 

@@ -1,6 +1,6 @@
 export const AnswerComponent = ({
-  mainWord,
-  randomWords,
+  	mainWord,
+  	randomWords,
 	setFeedback,
 	correctFeedback,
 	incorrectFeedback

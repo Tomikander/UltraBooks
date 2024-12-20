@@ -4,7 +4,8 @@ import WordSelector from "../../common/WordSelector/WordSelector";
 import WordSelectorWithFourWords from "../../common/WordSelectorWithFourWords/WordSelectorWithFourWords";
 import { AnswerComponent } from "../../common/AnswerComponent/AnswerComponent";
 import {SoundEffect} from "../../common/SoundEffect/SoundEffect";
-import LanguageSwitcher from "../../common/LanguageSwitcher/LanguageSwitcher";
+import  LanguageSwitcher from "../../common/LanguageSwitcher/LanguageSwitcher";
+
 
 export const WordsPage = () => {
     const { t, i18n } = useTranslation();

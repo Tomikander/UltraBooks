@@ -1,4 +1,4 @@
-import wordObjects from '../../../data/wordObjects';  // Path to your data array
+import wordObjects from '../../../data/wordObjects';  
 
 const WordSelector = ({ setMainWord, setMainImage, setShowMainWord, setShowAdditionalWords, setFeedback }) => {
 
@@ -11,9 +11,9 @@ const WordSelector = ({ setMainWord, setMainImage, setShowMainWord, setShowAddit
     // Update the state in the parent component
     setMainWord(selectedWord.value);
     setMainImage(selectedWord.src);
-    setShowMainWord(true);  // Showing the main word
-    setShowAdditionalWords(false);  // Showing the main word
-    setFeedback('');  // Clearing feedback
+    setShowMainWord(true);  
+    setShowAdditionalWords(false);  
+    setFeedback(''); 
   };
 
   return (
