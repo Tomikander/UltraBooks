@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import WordSelector from "../../common/WordSelector/WordSelector";
 import WordSelectorWithFourWords from "../../common/WordSelectorWithFourWords/WordSelectorWithFourWords";
 import { AnswerComponent } from "../../common/AnswerComponent/AnswerComponent";
-import {SoundEffect} from "../../common/SoundEffect/SoundEffect";
+
 import  LanguageSwitcher from "../../common/LanguageSwitcher/LanguageSwitcher";
 
 
@@ -29,7 +29,7 @@ export const WordsPage = () => {
 
     return (
       <>
-        <SoundEffect />
+       
         <h1>{t('NOW_GAME')}</h1>
 
         {/* Using the WordSelector component */}
